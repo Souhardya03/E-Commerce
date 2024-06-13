@@ -26,6 +26,6 @@ app.use("/images",express.static('uploads/images'));
 app.get("/",(req,res)=>{
     res.send({message:"Welcome To E-Commerce Backend"});
 })
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 console.log(`Server is running at http://localhost:${port}`);
 app.listen(port);
