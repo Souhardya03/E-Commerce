@@ -27,8 +27,8 @@ const upload = multer({ storage: storage });
 
 router.post(
   "/upload",
-  // authMiddlewares.requireSignIn,
-  // authMiddlewares.isAdmin,
+  authMiddlewares.requireSignIn,
+  authMiddlewares.isAdmin,
   upload.array('product', 4),
   imageController.uploadImage
 );
