@@ -9,7 +9,7 @@ const imageRoute = require("./routes/imageRouter.js")
 const connectDB = require("./config/db.js")
 connectDB();
 const corsoption = {
-    origin : "*",
+    origin : process.env.FRONT_URL,
     methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials : true, 
 }
