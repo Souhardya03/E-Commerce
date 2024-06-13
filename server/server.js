@@ -13,7 +13,7 @@ const corsoption = {
     methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials : true, 
 }
-app.use(cors(corsoption))
+app.use(cors())
 app.use(express.json());
 
 //Routes
