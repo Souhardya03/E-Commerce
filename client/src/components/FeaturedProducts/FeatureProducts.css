@@ -1,0 +1,18 @@
+.myswiper1 {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 80px;
+}
+
+.feature {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+  
+}
+
+.feature img {
+  display: block;
+  width: 100%;
+}

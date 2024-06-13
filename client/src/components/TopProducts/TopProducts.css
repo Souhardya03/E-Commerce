@@ -1,0 +1,19 @@
+.topproducts{
+    background: #302f2f52;
+}
+.active{
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+    background: red;
+    padding: 0.75rem 1.5rem;
+
+}
+.categorystyle{
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s;
+    border-radius: 6px;
+}
+.categorystyle:hover{
+    background: red;
+    border-radius: 6px;
+}

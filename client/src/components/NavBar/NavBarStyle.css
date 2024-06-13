@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Kalam:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Kalam:wght@300;400;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+.fontstyle {
+  font-family: "Acme", sans-serif;
+  font-weight: 400;
+}
+.fontstyle1 {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.loginbutton{
+	
+	background: linear-gradient(to left, rgba(250, 128, 114, 0) 50%, rgb(238, 69, 7) 50%) right;
+    background-size: 200%;
+    transition: .3s ease-out;
+	cursor: pointer;
+	
+}
+.loginbutton:hover{
+	background-position: left;
+	color: aliceblue;
+}
+@keyframes lefttrans{
+	0%{
+		left: 0%;
+	}
+	100%{
+		left: 100%;
+		background-color: rgb(203, 36, 36);
+	}
+}
+
+.navtransition {
+  animation: zoom 0.8s ease-in;
+}
+@keyframes zoom {
+  0% {
+    scale: 0;
+  }
+  50% {
+    scale: 1.04;
+  }
+  100% {
+    scale: 1;
+  }
+}
