@@ -27,7 +27,7 @@ app.get("/",(req,res)=>{
     res.send({message:"Welcome To E-Commerce Backend"});
 })
 const PORT = 5000;
-connectDb().then(()=>{
+connectDB().then(()=>{
     app.listen(PORT , ()=>{
         console.log( `Server is running on ${PORT}`);
     })
