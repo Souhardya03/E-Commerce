@@ -9,7 +9,7 @@ const imageRoute = require("./routes/imageRouter.js")
 const connectDB = require("./config/db.js")
 connectDB();
 const corsoption = {
-    origin : "https://e-commerce-admin-pied.vercel.app",
+    origin : "*",
     methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials : true, 
 }
