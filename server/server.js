@@ -7,7 +7,7 @@ const categoryRoute = require("./routes/categoryRoute.js")
 const productRoute = require("./routes/productRoute.js")
 const imageRoute = require("./routes/imageRouter.js")
 const connectDB = require("./config/db.js")
-connectDB();
+
 const corsoption = {
     origin : process.env.FRONT_URL,
     methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -26,6 +26,9 @@ app.use("/images",express.static('uploads/images'));
 app.get("/",(req,res)=>{
     res.send({message:"Welcome To E-Commerce Backend"});
 })
-const port = process.env.PORT || 5000;
-console.log(`Server is running at http://localhost:${port}`);
-app.listen(port);
+const PORT = 5000;
+connectDb().then(()=>{
+    app.listen(PORT , ()=>{
+        console.log( `Server is running on ${PORT}`);
+    })
+})
