@@ -21,7 +21,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/auth", categoryRoute);
 app.use("/api/auth", productRoute);
 app.use("/api/auth", imageRoute);
-app.use('/images', express.static(path.join(__dirname, '/tmp/uploads/images')));
+app.use("/images",express.static('uploads/images'));
 
 app.get("/",(req,res)=>{
     res.send({message:"Welcome To E-Commerce Backend"});
