@@ -17,14 +17,14 @@ const Home = () => {
   const [open, setopen] = useState(true);
   const [active, setactive] = useState(1);
  
-  // if( !isLoggedIn){
-  //   alert("Get Out you mf");
-  //   return (<Navigate to="/login" />);
-  // }
-  // else if(isAdmin===0){
-  //   alert("BSDK you are not admin");
-  //   return (<Navigate to="/login"/>)
-  // }
+  if( !isLoggedIn){
+    alert("Get Out you mf");
+    return (<Navigate to="/login" />);
+  }
+  else if(isAdmin===0){
+    alert("BSDK you are not admin");
+    return (<Navigate to="/login"/>)
+  }
   return (
     <>
       <div className="text-white flex ">
