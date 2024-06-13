@@ -8,7 +8,12 @@ const categoryRoute = require("./routes/categoryRoute.js")
 const productRoute = require("./routes/productRoute.js")
 const imageRoute = require("./routes/imageRouter.js")
 connectDB();
-app.use(cors())
+const corsoption = {
+    origin : "*",
+    methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials : true, 
+}
+app.use(cors(corsoption))
 app.use(express.json());
 
 //Routes
