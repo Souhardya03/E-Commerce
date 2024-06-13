@@ -1,12 +1,12 @@
 require("dotenv").config();
 const express = require("express")
-const connectDB = require("./config/db.js")
-const app = express();
 const cors = require("cors");
+const app = express();
 const authRoute = require("./routes/authRoute.js")
 const categoryRoute = require("./routes/categoryRoute.js")
 const productRoute = require("./routes/productRoute.js")
 const imageRoute = require("./routes/imageRouter.js")
+const connectDB = require("./config/db.js")
 connectDB();
 const corsoption = {
     origin : "*",
