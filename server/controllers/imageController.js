@@ -4,7 +4,7 @@ const uploadImage = (req,res)=>{
     try {
         const imageArray = []
         for(let i=0;i<req.files.length;i++){
-            const image_url = `http://localhost:8000/images/${req.files[i].filename}`;
+            const image_url = `https://e-commerce-backend-lzhb.onrender.com/images/${req.files[i].filename}`;
             imageArray.push(image_url);
             
         }
