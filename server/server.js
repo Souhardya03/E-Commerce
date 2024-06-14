@@ -9,11 +9,11 @@ const imageRoute = require("./routes/imageRouter.js")
 const connectDB = require("./config/db.js")
 
 const corsoption = {
-    origin : "*",
+    origin : ["http://localhost:3000"],
     methods : ["GET,HEAD,PUT,PATCH,POST,DELETE"],
     credentials : true, 
 }
-app.use(cors())
+app.use(cors(corsoption))
 app.use(express.json());
 
 //Routes
