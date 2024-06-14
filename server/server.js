@@ -9,7 +9,7 @@ const imageRoute = require("./routes/imageRouter.js")
 const connectDB = require("./config/db.js")
 
 const corsoption = {
-    origin : "http://localhost:3000",
+    origin : "*",
     methods : "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials : true, 
 }
