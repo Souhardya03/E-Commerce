@@ -63,7 +63,7 @@ const Order = () => {
                       </>
                     )}
                     <td className="px-6 py-4 border-r border-r-[#2d2f5b] font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      ₹ {item.price}
+                      ₹ {item.amount*item.price}
                     </td>
                     <td className="px-8 py-4 border-r border-r-[#2d2f5b] font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {item.amount}
