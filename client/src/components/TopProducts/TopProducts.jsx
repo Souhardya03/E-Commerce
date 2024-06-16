@@ -8,7 +8,7 @@ const TopProducts = () => {
   const { addToCart } = useCartContext();
   const { displayProducts = [], category = [] } = useAuth(); // Default to empty arrays to prevent undefined errors
   const [products, setProducts] = useState([]);
-  const [curSection, setCurSection] = useState(1);
+  const [curSection, setCurSection] = useState(0);
 
   useEffect(() => {
     // Set products to displayProducts when the component mounts or displayProducts updates
@@ -20,7 +20,7 @@ const TopProducts = () => {
   };
 
   const handleClick = (categoryId, index) => {
-    if (categoryId === category[1]._id) {
+    if (categoryId === category[0]._id) {
       setProducts(displayProducts);
     } else {
       const filteredProducts = displayProducts.filter(

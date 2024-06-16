@@ -9,7 +9,7 @@ import { FaPhone } from "react-icons/fa6";
 const Cart = () => {
   const navigate = useNavigate();
   const { userdata } = useAuth();
-  const data = JSON.parse(userdata);
+  const data = userdata;
   const { cart, removeFromCart, removeAllItems } = useCartContext();
   const orderClick = () => {
     toast.success("Order Successfull", {

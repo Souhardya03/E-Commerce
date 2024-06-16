@@ -19,7 +19,7 @@ const NavBar = () => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
-  const data = JSON.parse(userdata ? userdata : "{}");
+  const data = userdata;
   return (
     <div className="top-0 sticky bg-[#242323] z-[999]">
       <div className="flex  items-center pt-[14px] lg:px-[40px] px-4 justify-between">
@@ -110,7 +110,7 @@ const NavBar = () => {
                     </Menu.Item>
                     {isAdmin===1?<Menu.Item>
                       {({ active }) => (
-                        <a href="/admin" className="text-sm  text-white">
+                        <a href="https://e-commerce-admin-tan.vercel.app/customers" target="_blank" rel="noreferrer" className="text-sm  text-white">
                           Admin Panel
                         </a>
                       )}
@@ -123,13 +123,13 @@ const NavBar = () => {
                       )}
                     </Menu.Item>:null}
                     
-                    <Menu.Item>
+                    {/* <Menu.Item>
                       {({ active }) => (
                         <a href="/" className="text-sm text-white">
                           Sign out
                         </a>
                       )}
-                    </Menu.Item>
+                    </Menu.Item> */}
                   </div>
                 </Menu.Items>
               </Transition>

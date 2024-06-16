@@ -1,23 +1,28 @@
-// import { useEffect } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
-// import { Navigate } from "react-router-dom";
 
 export const AuthContext = createContext();
+
 export const AuthProvider = ({ children }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const [token, settoken] = useState(localStorage.getItem("token"));
-  const [userdata, setuserdata] = useState(localStorage.getItem("userdata"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [userdata, setUserdata] = useState(
+    JSON.parse(localStorage.getItem("userdata"))
+  );
+
   const datauser = (data) => {
-    console.log(userdata);
-    return window.localStorage.setItem("userdata", JSON.stringify(data.user));
+    const parsedUserdata = JSON.stringify(data.user);
+    setUserdata(parsedUserdata);
+    window.localStorage.setItem("userdata", parsedUserdata);
   };
-  //storing token
+
+  // Storing token
   const storeToken = (tkn) => {
-    settoken(tkn);
-    return window.localStorage.setItem("token", tkn);
+    setToken(tkn);
+    window.localStorage.setItem("token", tkn);
   };
-  //Create User
+
+  // Create User
   const createUser = async (user) => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/register`, {
@@ -27,20 +32,18 @@ export const AuthProvider = ({ children }) => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log("User Created");
         storeToken(data.token);
         datauser(data);
       } else {
         console.log("User Exists");
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error from create user frontend");
+      console.error("Error from create user frontend:", error);
     }
   };
 
-  //Login function
-  const Login = async (user) => {
+  // Login function
+  const login = async (user) => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/login`, {
         method: "POST",
@@ -49,109 +52,112 @@ export const AuthProvider = ({ children }) => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log("Login Successfull");
         storeToken(data.token);
-        console.log(isLoggedIn);
-        // console.log(data.user);
-
         datauser(data);
-        window.location.replace("/testpage");
       } else {
         console.log("Invalid Credentials");
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error from Login Frontend");
+      console.error("Error from login frontend:", error);
     }
   };
-  //Checking Login or not
+
+  // Checking Login or not
   const isLoggedIn = !!token;
-  console.log(isLoggedIn);
 
-  //admin check
-  const isAdmin = JSON.parse(userdata ? userdata : "{}").role;
+  // Admin check
+  const isAdmin = userdata?.role || 0;
 
-  //Logout function
+  // Logout function
   const logout = () => {
-    settoken("");
+    setToken("");
     window.localStorage.removeItem("token");
-    setuserdata("");
+    setUserdata("");
     window.localStorage.removeItem("userdata");
   };
 
-  //get products
-  const [displayProducts, setdisplayProducts] = useState()
-  const getProducts = async()=>{
+  // Get products
+  const [displayProducts, setDisplayProducts] = useState();
+  const getProducts = async () => {
     try {
-      const response = await fetch(`${apiUrl}/api/auth/get-products`,{
-        method: 'GET',
+      const response = await fetch(`${apiUrl}/api/auth/get-products`, {
+        method: "GET",
       });
       const data = await response.json();
-      if(response.ok){
-        setdisplayProducts(data);
+      if (response.ok) {
+        setDisplayProducts(data);
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error From context get Products");
+      console.error("Error from context get products:", error);
     }
-  }
-  const [category, setcategory] = useState();
-  const getCategory = async()=>{
+  };
+
+  // Get categories
+  const [category, setCategory] = useState();
+  const getCategory = async () => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/get-category`, {
         method: "GET",
-        
       });
-      if(response.ok){
+      if (response.ok) {
         const data = await response.json();
-        setcategory(data.categories);
-        
+        setCategory(data.categories);
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error From getcategory of context");
+      console.error("Error from getCategory of context:", error);
     }
-  }
-  const [singlecategory, setsinglecategory] = useState()
-  const getsinglecategory = async(id)=>{
-    try {
-      const response = await fetch(`${apiUrl}/api/auth/single-category/${id}`,{
-        method: 'GET',
-      })
-      const data = await response.json();
-      if(response.ok){
-        setsinglecategory(data);
-       return data
-      }
-    } catch (error) {
-      console.log(error);
-      console.log("Error From context single category");
-    }
-  }
-  useEffect(()=>{
-    getCategory();
-  },[])
+  };
 
-  useEffect(()=>{
+  // Get single category
+  const [singleCategory, setSingleCategory] = useState();
+  const getSingleCategory = async (id) => {
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/single-category/${id}`, {
+        method: "GET",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setSingleCategory(data);
+        return data;
+      }
+    } catch (error) {
+      console.error("Error from context single category:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCategory();
+  }, []);
+
+  useEffect(() => {
     getProducts();
-  },[])
+  }, []);
+
+  useEffect(() => {
+    setUserdata(JSON.parse(localStorage.getItem("userdata")));
+  }, [token]);
+
   return (
     <AuthContext.Provider
       value={{
         createUser,
         logout,
-        Login,
+        login,
         isLoggedIn,
         userdata,
         token,
         isAdmin,
-        displayProducts, category, getsinglecategory, singlecategory
+        displayProducts,
+        category,
+        getSingleCategory,
+        singleCategory,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
 export const useAuth = () => {
   return useContext(AuthContext);
 };

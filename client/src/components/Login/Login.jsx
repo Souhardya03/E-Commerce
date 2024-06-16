@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate()
-  const {createUser,Login} = useAuth();
+  const {createUser,login} = useAuth();
   const [user, setuser] = useState({
     name:"",
     email:"",
@@ -26,16 +26,15 @@ const handleLoginChange = (e)=>{
   const {name, value} = e.target;
    setlogindata({...logindata ,[name]:value});
 }
-const  submitHandler=(e)=>{
+const  submitHandler=async(e)=>{
   e.preventDefault();
-  // console.log(user);
-  createUser(user);
-  // window.location.replace("/testpage")
+  await createUser(user);
+  navigate("/")
 }
-const handleLogin = (e)=>{
+const handleLogin = async(e)=>{
   e.preventDefault();
-  Login(logindata)
-  navigate("/testpage")
+  await login(logindata)
+  navigate("/")
 }
   return (
     <div className="login">
