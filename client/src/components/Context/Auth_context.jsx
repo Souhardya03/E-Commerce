@@ -125,13 +125,34 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  //createorder
+
+  const createOrder = async (order) => {
+    console.log("from context",order);
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/create-order`, {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify( order ),
+      });
+      if(response.ok){
+        console.log("Order",response.json());
+      }
+    } catch (error) {
+      console.log(error);
+      console.log("Error from context create order");
+    }
+  };
+
   useEffect(() => {
     getCategory();
   }, []);
 
   useEffect(() => {
     getProducts();
-    
   }, []);
 
   useEffect(() => {
@@ -152,6 +173,7 @@ export const AuthProvider = ({ children }) => {
         category,
         getSingleCategory,
         singleCategory,
+        createOrder
       }}
     >
       {children}

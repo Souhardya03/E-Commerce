@@ -45,9 +45,9 @@ const Home = () => {
                 <BiCategoryAlt />
                 <NavLink to="/categories" onClick={()=>setactive(3)}>Category</NavLink>
               </div>
-              <div className="flex gap-2 items-center hover:text-[#6168e8] duration-150">
+              <div className={`flex gap-2 items-center ${active===4?"text-[#6168e8]":""} hover:text-[#6168e8] duration-150`}>
                 <MdAttachMoney />
-                <a href="/">Orders</a>
+                <NavLink to="/orders" onClick={()=>setactive(4)}>Orders</NavLink>
               </div>
               <div className="flex gap-2 items-center hover:text-[#6168e8] duration-150">
                 <RxExit/>

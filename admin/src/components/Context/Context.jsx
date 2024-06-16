@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/getallusers`, {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: {Authorization:isAuthorizedToken, "Content-Type": "application/json" },
       });
       if (response.ok) {
         const data = await response.json();
@@ -252,11 +252,30 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  //get all order
+  const [allorders, setallorders] = useState()
+  const displayallorders = async()=>{
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/display-orders`,{
+        method:"GET",
+        headers:{Authorization:isAuthorizedToken}
+      });
+      const data = await response.json();
+      if(response.ok){
+        setallorders(data.data)
+      }
+    } catch (error) {
+      console.log(error);
+      console.log("Error From displayallorders context");
+    }
+  }
+
   useEffect(() => {
     if (token && isAdmin === 1) {
       getProducts();
       getCategory();
       getAllUsers();
+      displayallorders();
     }
   }, [token]);
 
@@ -284,6 +303,7 @@ export const AuthProvider = ({ children }) => {
         getCategory,
         deleteProduct,
         deleteCategory,
+        allorders
       }}
     >
       {children}

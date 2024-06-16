@@ -8,10 +8,15 @@ import { FaPhone } from "react-icons/fa6";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { userdata } = useAuth();
+  const { userdata, createOrder } = useAuth();
   const data = userdata;
   const { cart, removeFromCart, removeAllItems } = useCartContext();
-  const orderClick = () => {
+  const [order, setorder] = useState({
+    userId:data.id,
+    email:data.email,
+    cart:cart
+  })
+  const orderClick = async() => {
     toast.success("Order Successfull", {
       position: "top-right",
       autoClose: 1000,
@@ -22,8 +27,13 @@ const Cart = () => {
       progress: undefined,
       theme: "dark",
     });
-    console.log({ cart: cart });
-
+    setorder({
+      userId:data.id,email:data.email, cart: cart
+    })
+    console.log(order);
+    if(order)
+    await createOrder(order);
+    
     navigate("/");
     removeAllItems();
   };

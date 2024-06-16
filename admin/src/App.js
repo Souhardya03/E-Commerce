@@ -9,6 +9,7 @@ import Products from "./components/Products/Products.jsx";
 import Category from "./components/Category/Category.jsx";
 import { useAuth } from "./components/Context/Context.jsx";
 import { useEffect } from "react";
+import Order from "./components/Orders/Order.jsx";
 
 function App() {
   const { isLoggedIn, isAdmin } = useAuth();
@@ -30,6 +31,7 @@ function App() {
           <Route path="/customers" element={<Customers />} />
           <Route path="/products" element={<Products />} />
           <Route path="/categories" element={<Category />} />
+          <Route path="/orders" element={<Order/>}/>
         </Route>
         <Route path="/logout" element={<Logout />} />
         <Route path="/modal" element={<Modal />} />
