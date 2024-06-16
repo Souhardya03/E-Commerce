@@ -7,7 +7,7 @@ const uploadImage = (req, res) => {
       const imageUrl = {
         url: file.path,
       };
-      imageArray.push(imageUrl);
+      imageArray.push(imageUrl.url);
     }
 
     return res.status(200).json({
