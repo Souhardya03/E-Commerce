@@ -6,7 +6,7 @@ import { useAuth } from "../Context/Context";
 
 const Login = () => {
   const navigate = useNavigate()
-  const {createUser,Login} = useAuth();
+  const {createUser,login} = useAuth();
   const [user, setuser] = useState({
     name:"",
     email:"",
@@ -34,8 +34,8 @@ const  submitHandler=(e)=>{
 }
 const handleLogin = (e)=>{
   e.preventDefault();
-  Login(logindata)
-  window.location.replace("/customers")
+  login(logindata)
+  navigate("/customers")
 }
   return (
     <div className="login">

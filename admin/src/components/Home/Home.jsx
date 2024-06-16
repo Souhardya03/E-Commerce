@@ -17,14 +17,13 @@ const Home = () => {
   const [open, setopen] = useState(true);
   const [active, setactive] = useState(1);
  
-  // if( !isLoggedIn){
-  //   alert("Get Out you mf");
-  //   return (<Navigate to="/login" />);
-  // }
-  console.log("Fom home",isLoggedIn);
-   if(isLoggedIn && isAdmin===0){
+  if( !isLoggedIn){
+    alert("Get Out you mf");
+    return (<Navigate to="/logout" />);
+  }
+  else if(isAdmin===0){
     alert("BSDK you are not admin");
-    return (<Navigate to="/login"/>)
+    return (<Navigate to="/logout"/>)
   }
   return (
     <>

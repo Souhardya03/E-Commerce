@@ -1,20 +1,18 @@
-// import { useEffect } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
-// import { Navigate } from "react-router-dom";
-import {toast, Zoom} from "react-toastify"
+import { toast, Zoom } from "react-toastify";
 
 export const AuthContext = createContext();
+
 export const AuthProvider = ({ children }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
-  const [allUsers, setallUsers] = useState();
+  const [allUsers, setAllUsers] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [userdata, setUserdata] = useState(
+    JSON.parse(localStorage.getItem("userdata"))
+  );
 
-  const [token, settoken] = useState(localStorage.getItem("token"));
-  const [userdata, setuserdata] = useState(localStorage.getItem("userdata"));
-
-  //Getting Token
   const isAuthorizedToken = token;
 
-  //Create User
   const createUser = async (user) => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/register`, {
@@ -26,93 +24,90 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         console.log("User Created");
         storeToken(data.token);
-        datauser(data);
+        storeUserdata(data.user);
       } else {
         console.log("User Exists");
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error from create user frontend");
+      console.log("Error from create user frontend", error);
     }
   };
 
-  //Login function
-  const Login = async (user) => {
+  const login = async (user) => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
+      const data = await response.json();
+      console.log(data);
       if (response.ok) {
-        const data = await response.json();
-        console.log("Login Successfull");
+        console.log("Login Successful");
         storeToken(data.token);
-        // console.log(isLoggedIn);
-        // console.log(data.user);
-
-        datauser(data);
-        // window.location.replace("/testpage")
+        console.log(token);
+        storeUserdata(data.user);
       } else {
         console.log("Invalid Credentials");
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error from Login Frontend");
+      console.log("Error from Login Frontend", error);
     }
   };
-  const datauser = (data) => {
-    console.log(userdata);
-    return window.localStorage.setItem("userdata", JSON.stringify(data.user));
-  };
-  //storing token
+
   const storeToken = (tkn) => {
-    settoken(tkn);
-    return window.localStorage.setItem("token", tkn);
+    setToken(tkn);
+    localStorage.setItem("token", tkn);
   };
-  //Checking Login or not
-  const isLoggedIn = !!token;
-  // console.log(isLoggedIn);
 
-  //admin check
-  const isAdmin = JSON.parse(userdata ? userdata : "{}").role;
-  // console.log("Admin Context",isAdmin);
+  const storeUserdata = (user) => {
+    setUserdata(user);
+    localStorage.setItem("userdata", JSON.stringify(user));
+  };
 
-  //Logout function
   const logout = () => {
-    settoken("");
-    window.localStorage.removeItem("token");
-    setuserdata("");
-    window.localStorage.removeItem("userdata");
+    setToken(null);
+    localStorage.removeItem("token");
+    setUserdata(null);
+    localStorage.removeItem("userdata");
   };
 
-  //get all users
-  const getallUsers = async () => {
-    const response = await fetch(`${apiUrl}/api/auth/getallusers`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setallUsers(data);
+  const isLoggedIn = !!token;
+  const isAdmin = userdata?.role === "admin";
+
+  const getAllUsers = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/getallusers`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setAllUsers(data);
+      }
+    } catch (error) {
+      console.log("Error from getAllUsers", error);
     }
   };
 
-  //delete user
-  const deleteuser = async (id) => {
-    const response = await fetch(`${apiUrl}/api/auth/deleteuser/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: isAuthorizedToken,
-      },
-    });
-    if (response.ok) {
-      // alert('User has been deleted');
-      getallUsers();
+  const deleteUser = async (id) => {
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/deleteuser/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: isAuthorizedToken,
+        },
+      });
+      if (response.ok) {
+        getAllUsers();
+      }
+    } catch (error) {
+      console.log("Error from deleteUser", error);
     }
   };
-  const [singleuser, setsingleuser] = useState(null);
-  const getsingleuser = async (id) => {
+
+  const [singleUser, setSingleUser] = useState(null);
+  const getSingleUser = async (id) => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/getsingleuser/${id}`, {
         method: "GET",
@@ -120,25 +115,24 @@ export const AuthProvider = ({ children }) => {
       });
       if (response.ok) {
         const data = await response.json();
-        setsingleuser(data);
+        setSingleUser(data);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error from getSingleUser", error);
     }
   };
 
-  //update user
-  const updateUser = async(id,user)=>{
+  const updateUser = async (id, user) => {
     try {
-      const response = await fetch(`${apiUrl}/api/auth/updateuser/${id}`,{
+      const response = await fetch(`${apiUrl}/api/auth/updateuser/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
       });
-      if(response.ok){
-        toast.success('User Updated!', {
+      if (response.ok) {
+        toast.success("User Updated!", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -148,88 +142,74 @@ export const AuthProvider = ({ children }) => {
           progress: undefined,
           theme: "dark",
           transition: Zoom,
-          });
-        getallUsers();
+        });
+        getAllUsers();
       }
     } catch (error) {
-      console.log("Error From Context Single User");
+      console.log("Error from updateUser", error);
     }
-  }
+  };
 
-  //Get Category
-  const [category, setcategory] = useState();
-  const getCategory = async()=>{
+  const [category, setCategory] = useState([]);
+  const getCategory = async () => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/get-category`, {
         method: "GET",
         headers: { Authorization: isAuthorizedToken },
       });
-      if(response.ok){
+      if (response.ok) {
         const data = await response.json();
-        setcategory(data.categories);
-        
+        setCategory(data.categories);
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error From getcategory of context");
+      console.log("Error from getCategory", error);
     }
-  }
+  };
 
-  //Get Products
-  const [displayProducts, setdisplayProducts] = useState()
-  const getProducts = async()=>{
+  const [displayProducts, setDisplayProducts] = useState([]);
+  const getProducts = async () => {
     try {
-      const response = await fetch(`${apiUrl}/api/auth/get-products`,{
-        method: 'GET',
-        headers: {
-          Authorization:isAuthorizedToken
-        }
+      const response = await fetch(`${apiUrl}/api/auth/get-products`, {
+        method: "GET",
+        headers: { Authorization: isAuthorizedToken },
       });
-      const data = await response.json();
-      if(response.ok){
-        setdisplayProducts(data);
+      if (response.ok) {
+        const data = await response.json();
+        setDisplayProducts(data);
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error From context get Products");
+      console.log("Error from getProducts", error);
     }
-  }
+  };
 
-  //Get single category
-  const [singlecategory, setsinglecategory] = useState()
-  const getsinglecategory = async(id)=>{
+  const [singleCategory, setSingleCategory] = useState(null);
+  const getSingleCategory = async (id) => {
     try {
-      const response = await fetch(`${apiUrl}/api/auth/single-category/${id}`,{
-        method: 'GET',
-        headers: {
-          Authorization:isAuthorizedToken
-        }
-      })
-      const data = await response.json();
-      if(response.ok){
-        setsinglecategory(data);
-       return data
+      const response = await fetch(`${apiUrl}/api/auth/single-category/${id}`, {
+        method: "GET",
+        headers: { Authorization: isAuthorizedToken },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSingleCategory(data);
+        return data;
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error From context single category");
+      console.log("Error from getSingleCategory", error);
     }
-  }
+  };
 
-  //delete product
-  const deleteProduct = async(id)=>{
+  const deleteProduct = async (id) => {
     try {
-      const response = await fetch(`${apiUrl}/api/auth/delete-product/${id}`,{
+      const response = await fetch(`${apiUrl}/api/auth/delete-product/${id}`, {
         method: "DELETE",
-        headers:{
-          Authorization:isAuthorizedToken
-        }
-      })
-      if(response.ok){
-
+        headers: {
+          Authorization: isAuthorizedToken,
+        },
+      });
+      if (response.ok) {
         getProducts();
-        
-        toast.success('Product Deleted!', {
+        toast.success("Product Deleted!", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -239,27 +219,24 @@ export const AuthProvider = ({ children }) => {
           progress: undefined,
           theme: "dark",
           transition: Zoom,
-          });
+        });
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error From context delete product");
+      console.log("Error from deleteProduct", error);
     }
-  }
+  };
 
-  //delete category
-  const deletecategory = async(id)=>{
+  const deleteCategory = async (id) => {
     try {
-      const response = await fetch(`${apiUrl}/api/auth/delete-category/${id}`,
-        {
-          method:"DELETE",
-          headers: {
-            Authorization:isAuthorizedToken
-          }
-        }
-      )
-      if(response.ok){
-        toast.success('Category Deleted!', {
+      const response = await fetch(`${apiUrl}/api/auth/delete-category/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: isAuthorizedToken,
+        },
+      });
+      if (response.ok) {
+        getCategory();
+        toast.success("Category Deleted!", {
           position: "top-center",
           autoClose: 1000,
           hideProgressBar: false,
@@ -269,54 +246,51 @@ export const AuthProvider = ({ children }) => {
           progress: undefined,
           theme: "dark",
           transition: Zoom,
-          });
-        getCategory();
+        });
       }
     } catch (error) {
-      console.log(error);
-      console.log("Error From context delete category");
+      console.log("Error from deleteCategory", error);
     }
-  }
-  
-  useEffect(()=>{
-    getProducts();
-  },[])
-
-  useEffect(()=>{
-    getCategory();
-  },[])
-  
-  useEffect(() => {
-    getallUsers();
-  }, []);
+  };
 
   useEffect(() => {
-    getsingleuser();
-  }, []);
+    if (token) {
+      getProducts();
+      getCategory();
+      getAllUsers();
+    }
+  }, [token]);
+
   return (
     <AuthContext.Provider
       value={{
         apiUrl,
         allUsers,
-        Login,
+        login,
         createUser,
         logout,
         isAdmin,
         isLoggedIn,
-        deleteuser,
-        getsingleuser,
-        singleuser,
+        deleteUser,
+        getSingleUser,
+        singleUser,
         isAuthorizedToken,
-        updateUser,category,
-        displayProducts,getProducts,
-        singlecategory,getsinglecategory,getCategory,
-        deleteProduct,deletecategory
+        updateUser,
+        category,
+        displayProducts,
+        getProducts,
+        singleCategory,
+        getSingleCategory,
+        getCategory,
+        deleteProduct,
+        deleteCategory,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
 export const useAuth = () => {
   return useContext(AuthContext);
 };
