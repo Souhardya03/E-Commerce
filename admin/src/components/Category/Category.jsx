@@ -5,7 +5,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const Category = () => {
   const [seen, setSeen] = useState(false);
-  const { category, deletecategory } = useAuth();
+  const { category, deleteCategory } = useAuth();
   const handleToggle = () => {
     setSeen(!seen);
   };
@@ -49,7 +49,7 @@ const Category = () => {
                       <div className="flex gap-2 ml-3 items-center justify-center text-gray-500">
                         <div
                           className="p-2 hover:scale-110 duration-200 rounded-md hover:bg-red-500 hover:text-white bg-[#524f4f40]"
-                          onClick={()=>deletecategory(data._id)}
+                          onClick={()=>deleteCategory(data._id)}
                         >
                           <MdOutlineDeleteOutline className="text-lg" />
                         </div>

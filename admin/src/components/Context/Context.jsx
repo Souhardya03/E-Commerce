@@ -253,7 +253,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (token) {
+    if (token && isAdmin===1) {
       getProducts();
       getCategory();
       getAllUsers();

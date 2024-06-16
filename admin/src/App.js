@@ -13,6 +13,7 @@ import { useAuth } from "./components/Context/Context.jsx";
 function App() {
   const {isLoggedIn,isAdmin}= useAuth();
   const navigate = useNavigate();
+  
   if(isLoggedIn && isAdmin===0)
     navigate("/logout")
   return (
