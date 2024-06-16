@@ -131,6 +131,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     getProducts();
+    
   }, []);
 
   useEffect(() => {

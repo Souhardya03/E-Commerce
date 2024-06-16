@@ -7,7 +7,7 @@ import { useAuth } from "../Context/Auth_context";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { displayProducts } = useAuth();
+  const { displayProducts,getSingleCategory,singleCategory } = useAuth();
   const [data, setData] = useState(null);
   const [previewimg, setPreviewimg] = useState("");
   const [cur_section, setCurSection] = useState(0);
@@ -19,6 +19,10 @@ const ProductDetails = () => {
       if (product) setPreviewimg(product.photo[0]);
     }
   }, [displayProducts, id]);
+  useEffect(() => {
+    getSingleCategory(data?.category); // Fetch category when data or category ID changes
+  }, [data?.category, getSingleCategory]);
+
 
   const changeImage = (i) => {
     setPreviewimg(data.photo[i]);
@@ -29,9 +33,18 @@ const ProductDetails = () => {
 
   if (!data) {
     return (
-      <div className="font-[sans-serif] bg-[#191919] text-white p-6">
-        Loading product details...
+      <div className="flex flex-col gap-2 items-center justify-center h-[80vh]">
+        <div
+          class="inline-block h-14 w-14 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+          role="status"
+        >
+          <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+            Loading...
+          </span>
+        </div>
+        <div className="text-white font-medium text-lg">Loading ...</div>
       </div>
+      
     );
   }
 
@@ -147,7 +160,7 @@ const ProductDetails = () => {
             </li>
             <li className="text-sm">
               Generic Name{" "}
-              <span className="ml-4 float-right">{data.category}</span>
+              <span className="ml-4 float-right">{singleCategory ? singleCategory.category.name : ''}</span>
             </li>
             <li className="text-sm">
               Microphone <span className="ml-4 float-right">Yes</span>
