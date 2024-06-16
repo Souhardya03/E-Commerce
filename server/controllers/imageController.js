@@ -1,19 +1,14 @@
-
-
-const uploadImage = (req,res)=>{
+const uploadImage = (req, res) => {
     try {
-        const imageArray = []
-        for(let i=0;i<req.files.length;i++){
-            const image_url = `${process.env.BACKEND_URL}/images/${req.files[i].filename}`;
-            imageArray.push(image_url);
-            
-        }
+        const imageArray = req.files.map(file => file.path); // Cloudinary URLs are in `file.path`
         return res
-          .status(200)
-          .json({ message: "Image Uploaded", image_url: imageArray });
+            .status(200)
+            .json({ message: "Images Uploaded", image_urls: imageArray });
     } catch (error) {
-        console.log("Error From image controller");
+        console.log("Error from image controller");
         console.log(error);
+        return res.status(500).json({ error: "Error uploading images" });
     }
 }
-module.exports={uploadImage}
+
+module.exports = { uploadImage };
