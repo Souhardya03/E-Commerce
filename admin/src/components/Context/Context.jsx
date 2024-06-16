@@ -41,11 +41,10 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify(user),
       });
       const data = await response.json();
-      console.log(data);
+      
       if (response.ok) {
         console.log("Login Successful");
         storeToken(data.token);
-        console.log(token);
         storeUserdata(data.user);
       } else {
         console.log("Invalid Credentials");
@@ -73,7 +72,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isLoggedIn = !!token;
-  const isAdmin = userdata?.role === "admin";
+  const isAdmin = userdata?.role;
 
   const getAllUsers = async () => {
     try {
@@ -271,6 +270,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         isAdmin,
         isLoggedIn,
+        storeToken,
         deleteUser,
         getSingleUser,
         singleUser,

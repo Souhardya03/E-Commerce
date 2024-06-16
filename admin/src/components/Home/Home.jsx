@@ -13,18 +13,10 @@ import { useAuth } from "../Context/Context";
 import { RxExit } from "react-icons/rx";
 
 const Home = () => {
-  const {isLoggedIn,isAdmin} = useAuth();
+  
   const [open, setopen] = useState(true);
   const [active, setactive] = useState(1);
  
-  if( !isLoggedIn){
-    alert("Get Out you mf");
-    return (<Navigate to="/logout" />);
-  }
-  else if(isAdmin===0){
-    alert("BSDK you are not admin");
-    return (<Navigate to="/logout"/>)
-  }
   return (
     <>
       <div className="text-white flex ">
