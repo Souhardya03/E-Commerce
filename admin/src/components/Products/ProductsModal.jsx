@@ -40,7 +40,6 @@ const ProductsModal = ({ toggle, handletog }) => {
       });
 
       const data = await response.json();
-      console.log("image ", data);
       if (response.ok) {
         return data.image_url;
       } else {
@@ -55,7 +54,6 @@ const ProductsModal = ({ toggle, handletog }) => {
   const handleSubmit = async () => {
     try {
       const image_url = await uploadPhotos();
-      console.log(image_url);
       if (image_url) {
         const productData = {
           name: user.name,
@@ -66,7 +64,7 @@ const ProductsModal = ({ toggle, handletog }) => {
           category: user.category,
           topProduct: user.topProduct,
           featuredProduct: user.featuredProduct,
-          photo: image_url,
+          photo: image_url[0].url,
           info: user.info
         };
 
@@ -390,7 +388,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                     </div>
                   </div>
                 </div>
-                <div className="px-4 pb-8 sm:flex sm:flex-row-reverse sm:px-6" onClick={handletog}>
+                <div className="px-4 pb-8 sm:flex sm:flex-row-reverse sm:px-6" >
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 hover:scale-110 duration-200 sm:ml-3 sm:w-auto"

@@ -1,8 +1,8 @@
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const multer = require('multer');
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
 const authMiddlewares = require('../middlewares/authmiddlewares.js');
 const imageController = require('../controllers/imageController.js');
 
@@ -16,9 +16,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'product_images', // Optional - specify a folder in Cloudinary
-    format: async (req, file) => 'jpg', // Optional - formats available
-    public_id: (req, file) => `${file.fieldname}_${Date.now()}`, // Optional - file name in Cloudinary
+    folder: 'product_images',
+    format: async (req, file) => 'png',
+    public_id: (req, file) => `${file.fieldname}_${Date.now()}`,
   },
 });
 
