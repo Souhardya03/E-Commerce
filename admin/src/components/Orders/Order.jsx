@@ -20,13 +20,13 @@ const Order = () => {
     <div>
       <div className="text-[#97a4be] font-medium text-3xl">Orders</div>
       <div className="h-auto bg-[#151431] p-4 rounded-lg mt-4">
-        <div
+        {/* <div
           className="mb-4 cursor-pointer lg:w-[15%] lg:hover:scale-105 hover:bg-[#6367f0] duration-200 p-2 rounded-[4px] flex justify-center gap-1 bg-blue-500"
           onClick={handleToggle}
         >
           <button className="text-sm font-medium">Add New</button>
           <div className="text-lg">+</div>
-        </div>
+        </div> */}
         <div
           className={`relative border ${
             allorders.length === 0 ? "h-[8rem]" : "h-[30rem]"
