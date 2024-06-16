@@ -176,6 +176,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                         className="w-full bg-[#1e1e49] p-4 mt-1 rounded-md"
                         value={user.name}
                         placeholder="Enter the title of product..."
+                        required
                       />
                     </div>
                     <div className="px-4">
@@ -191,6 +192,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                         className="w-full bg-[#1e1e49] p-4 mt-1 rounded-md"
                         value={user.info}
                         placeholder="Enter the info of product..."
+                        required
                       />
                     </div>
                     <div className="py-3 px-4">
@@ -207,6 +209,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                         placeholder="Enter product description..."
                         rows="3"
                         cols="2"
+                        required
                       />
                     </div>
                     <div className="px-4 flex gap-2 pb-2">
@@ -223,6 +226,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                           value={user.finalprice}
                           className="w-full bg-[#1e1e49] p-4 mt-1 rounded-md"
                           placeholder="Enter Price"
+                          required
                         />
                       </div>
                       <div>
@@ -238,6 +242,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                           value={user.originalprice}
                           className="w-full bg-[#1e1e49] p-4 mt-1 rounded-md"
                           placeholder="Enter Price"
+                          required
                         />
                       </div>
                       <div className="flex flex-col text-right">
@@ -253,6 +258,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                           value={user.quantity}
                           className="w-full bg-[#1e1e49] text-right p-4 mt-1 rounded-md"
                           placeholder="0"
+                          required
                         />
                       </div>
                     </div>
@@ -276,6 +282,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                           onChange={handleInput}
                           value={user.category}
                           className="w-full bg-[#1e1e49] p-4 mt-2 rounded-[4px]"
+                          required
                         >
                           <option value="">Select Category</option>
                           {category.map((cat) => (
@@ -306,6 +313,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                           onChange={handleInput}
                           value={user.topProduct}
                           className="w-full bg-[#1e1e49] p-4 mt-2 rounded-[4px]"
+                          required
                         >
                           <option value="">Choose</option>
 
@@ -334,6 +342,7 @@ const ProductsModal = ({ toggle, handletog }) => {
                           onChange={handleInput}
                           value={user.featuredProduct}
                           className="w-full bg-[#1e1e49] p-4 mt-2 rounded-[4px]"
+                          required
                         >
                           <option value="">Choose</option>
 
