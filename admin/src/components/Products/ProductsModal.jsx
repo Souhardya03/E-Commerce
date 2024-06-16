@@ -64,7 +64,7 @@ const ProductsModal = ({ toggle, handletog }) => {
           category: user.category,
           topProduct: user.topProduct,
           featuredProduct: user.featuredProduct,
-          photo: image_url[0].url,
+          photo: image_url,
           info: user.info
         };
 
