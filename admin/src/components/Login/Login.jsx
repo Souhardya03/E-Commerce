@@ -1,42 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import './LoginStyle.css'
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/Context";
 
 const Login = () => {
-  const navigate = useNavigate()
-  const {createUser,login} = useAuth();
-  const [user, setuser] = useState({
-    name:"",
-    email:"",
-    password:"",
-    phone:"",
-    address:""
-})
-const [logindata, setlogindata] = useState({
-  email:"",
-  password:""
-})
-const  handleInputChange= (e) =>{
-  const {name, value} = e.target;
-   setuser({...user ,[name]:value});
-}
-const handleLoginChange = (e)=>{
-  const {name, value} = e.target;
-   setlogindata({...logindata ,[name]:value});
-}
-const  submitHandler=(e)=>{
-  e.preventDefault();
-  // console.log(user);
-  createUser(user);
-  // window.location.replace("/testpage")
-}
-const handleLogin = (e)=>{
-  e.preventDefault();
-  login(logindata)
-  navigate("/customers")
-}
+  const navigate = useNavigate();
+  const { createUser, login } = useAuth();
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: ""
+  });
+  const [logindata, setLogindata] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleLoginChange = (e) => {
+    const { name, value } = e.target;
+    setLogindata({ ...logindata, [name]: value });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    await createUser(user);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    await login(logindata);
+    navigate("/customers");
+  };
+
   return (
     <div className="login">
       <div id="stars"></div>
@@ -86,11 +88,7 @@ const handleLogin = (e)=>{
                             />
                             <i className="input-icon uil uil-lock-alt"></i>
                           </div>
-                          <button
-                            onSubmit={handleLogin}
-                            
-                            className="btn mt-4"
-                          >
+                          <button className="btn mt-4">
                             Login
                           </button>
                           <p className="mb-0 mt-4 text-center">
@@ -160,10 +158,7 @@ const handleLogin = (e)=>{
                             />
                             <i className="input-icon uil uil-location-point"></i>
                           </div>
-                          <button
-                            onClick={submitHandler}
-                            className="btn mt-4"
-                          >
+                          <button className="btn mt-4">
                             Register
                           </button>
                         </div>

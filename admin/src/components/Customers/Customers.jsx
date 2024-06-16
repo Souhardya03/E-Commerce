@@ -5,7 +5,7 @@ import { FaRegEdit } from "react-icons/fa";
 import Modal from "../Modal/Modal";
 
 const Customers = () => {
-  const { allUsers, deleteuser, getsingleuser } = useAuth();
+  const { allUsers, deleteUser, getSingleUser } = useAuth();
   const [seen, setseen] = useState(false)
   // console.log("seen",seen);
   const handletoggle = ()=>{
@@ -70,11 +70,11 @@ const Customers = () => {
                   </td>
                   <td className="px-6 py-4  ">
                     <div className="flex gap-2 ml-3 items-center text-gray-500">
-                      <div className=" p-2 hover:scale-110 duration-200 rounded-md hover:bg-red-500 hover:text-white bg-[#524f4f40]" onClick={()=>deleteuser(data._id)}>
+                      <div className=" p-2 hover:scale-110 duration-200 rounded-md hover:bg-red-500 hover:text-white bg-[#524f4f40]" onClick={()=>deleteUser(data._id)}>
                         <MdOutlineDeleteOutline className="text-lg " />
                       </div>
                       <div className=" p-2 rounded-md hover:scale-110 duration-200 hover:bg-green-600 hover:text-white bg-[#524f4f40]" onClick={()=>setseen(!seen)}>
-                        <FaRegEdit className="text-lg" onClick={()=>getsingleuser(data.name)} />
+                        <FaRegEdit className="text-lg" onClick={()=>getSingleUser(data.name)} />
                       </div>
                       
                     </div>

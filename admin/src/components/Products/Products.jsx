@@ -5,7 +5,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const Products = () => {
   const [seen, setSeen] = useState(false);
-  const { displayProducts, getsinglecategory, deleteProduct } = useAuth();
+  const { displayProducts, getSingleCategory, deleteProduct } = useAuth();
   const [categories, setCategories] = useState({});
 
   const handleToggle = () => {
@@ -17,7 +17,7 @@ const Products = () => {
       const categoryData = {};
       for (const product of displayProducts) {
         if (product.category && !categoryData[product.category]) {
-          const category = await getsinglecategory(product.category);
+          const category = await getSingleCategory(product.category);
 
           if (category) {
             categoryData[product.category] = category.category.name;

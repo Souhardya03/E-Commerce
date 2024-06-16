@@ -8,8 +8,7 @@ import { FaRegUser } from "react-icons/fa";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { BiCategoryAlt } from "react-icons/bi";
 import { MdAttachMoney } from "react-icons/md";
-import { NavLink, Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../Context/Context";
+import { NavLink, Outlet } from "react-router-dom";
 import { RxExit } from "react-icons/rx";
 
 const Home = () => {

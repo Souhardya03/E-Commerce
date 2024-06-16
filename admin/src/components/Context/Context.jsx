@@ -105,7 +105,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const [singleUser, setSingleUser] = useState(null);
+  const [singleuser, setSingleUser] = useState(null);
   const getSingleUser = async (id) => {
     try {
       const response = await fetch(`${apiUrl}/api/auth/getsingleuser/${id}`, {
@@ -253,7 +253,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (token && isAdmin===1) {
+    if (token && isAdmin === 1) {
       getProducts();
       getCategory();
       getAllUsers();
@@ -273,7 +273,7 @@ export const AuthProvider = ({ children }) => {
         storeToken,
         deleteUser,
         getSingleUser,
-        singleUser,
+        singleuser,
         isAuthorizedToken,
         updateUser,
         category,
