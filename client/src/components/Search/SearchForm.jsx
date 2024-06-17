@@ -27,7 +27,7 @@ const SearchForm = () => {
         type="text"
         onKeyDown={handleclick}
         onChange={handlesearch}
-        className="lg:w-[60vw] md:w-[45vw] w-[45vw] text-white md:p-2 border border-gray-600 lg:p-2  p-2 px-2 lg:text-xl text-[14px] lg:placeholder:text-lg  placeholder:text-[11px] placeholder:font-medium ml-2 lg:rounded-[8px] rounded-[4px] bg-[#3f3c3c] "
+        className="lg:w-[60vw] md:w-[45vw] w-[40vw] text-white md:p-2 border border-gray-600 lg:p-2  p-2 px-2 lg:text-xl text-[14px] lg:placeholder:text-lg  placeholder:text-[8px] placeholder:font-medium ml-2 lg:rounded-[8px] rounded-[4px] bg-[#3f3c3c] "
         placeholder="Search for the product..."
       />
     </form>
