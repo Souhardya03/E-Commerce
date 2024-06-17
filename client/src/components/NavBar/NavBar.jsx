@@ -1,5 +1,5 @@
 import React from "react";
-
+import logo from "./logo.png"
 import { IoCartOutline } from "react-icons/io5";
 import { VscAccount } from "react-icons/vsc";
 import { Fragment } from "react";
@@ -23,13 +23,17 @@ const NavBar = () => {
   return (
     <div className="top-0 sticky bg-[#242323] z-[999]">
       <div className="flex  items-center pt-[14px] lg:px-[40px] px-4 justify-between">
+        <div className="flex items-center gap-2 lg:gap-4">
+
+        <img src={logo} className="w-6 lg:w-10" alt="" />
         <Link
           to="/"
           onClick={scrollToTop}
-          className="lg:text-3xl md:text-2xl text-xl text-[#d8d6d6da] fontstyle font-medium"
-        >
+          className="lg:text-3xl md:text-2xl text-[15px] text-[#d8d6d6da] fontstyle font-medium"
+          >
           X-Head
         </Link>
+          </div>
         <div>
           <SearchForm />
         </div>

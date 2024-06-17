@@ -32,81 +32,60 @@ const OrderList = () => {
   }
 
   return (
-    <div className="p-8">
-      <div className="text-[#97a4be] font-medium text-3xl">Get your orders</div>
-      <div className="h-auto bg-[#4c4c4d] p-4 rounded-lg mt-4">
+    <div className="lg:p-8 p-6">
+      <div className="text-[#97a4be] text-center font-medium text-3xl">
+        Get your orders
+      </div>
+      <div className="h-auto  rounded-lg ">
         <div
-          className={`relative border ${
-            userOrders.length === 0 ? "h-[8rem]" : "h-[30rem]"
-          } overflow-y-auto border-[#cdcdd0] bg-[#353538] overflow-x-auto shadow-md sm:rounded-lg`}
+          className={
+            userOrders.length !== 0
+              ? "mt-8 space-y-3 rounded-lg   bg-[#302f2f] px-2 py-4 sm:px-6"
+              : "mt-8 space-y-3 rounded-lg  bg-[#302f2f] px-2 py-4 sm:px-6"
+          }
         >
-          <table className="w-full text-sm text-left rtl:bg-transparent text-gray-500 dark:text-gray-400">
-            <thead className="text-xs sticky top-0 bg-[#353538] border-b-black text-gray-700 uppercase dark:text-gray-400">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-4 border-r border-b-[#c0c0c3] border-b border-r-[#c0c0c3]"
-                >
-                  Products
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-4 border-r border-b-[#c0c0c3] border-b border-r-[#c0c0c3]"
-                >
-                  Price
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-4 border-r border-b-[#c0c0c3] border-b border-r-[#c0c0c3]"
-                >
-                  Amount
-                </th>
-                {/* <th
-                  scope="col"
-                  className="px-6 border-b-[#c0c0c3] text-center border-b py-4"
-                >
-                  Action
-                </th> */}
-              </tr>
-            </thead>
-            <tbody className="">
-              {userOrders.map((item, itemIndex) => (
-                <tr
-                  key={`${itemIndex}`}
-                  className="border-b dark:border-gray-700"
-                >
-                  <td className="lg:px-6 px-3 py-4 border-r border-b-[#c0c0c3] border-b border-r-[#c0c0c3] w-[28%] font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div className="flex gap-2 items-center">
-                      <img
-                        src={item.image}
-                        alt=""
-                        className="w-[25%] rounded-[6px]"
-                      />
-                      <div className="text-[12px] lg:text-sm">{item.title}</div>
+          {userOrders.length !== 0 ? (
+            userOrders?.map((item) => (
+              <div key={item.id}>
+                  <div className="absolute right-1 lg:right-3 mt-6  rounded-[4px] p-1 px-3 font-medium bg-red-500 text-white ">
+                    <div text-sm>x{item.amount}</div>
+                  </div>
+                <div className="items-center rounded-lg bg-[#474444] ">
+                  <div className="flex items-center">
+                    <img
+                      className="m-2 h-16 w-28 rounded-md  object-contain object-center"
+                      src={item.image}
+                      alt=""
+                    />
+                    <div className="flex w-full flex-col px-4 py-4">
+                      <span className="font-semibold lg:text-lg md:text-xl text-[12px] text-white">
+                        {item.title}
+                      </span>
+                      <span className="float-right text-[8px] lg:text-sm md:text-lg text-gray-400">
+                        {item.info}
+                      </span>
                     </div>
-                  </td>
-                  <td className="px-6 py-4 border-r border-b-[#c0c0c3] border-b border-r-[#c0c0c3] font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    ₹ {item.amount * item.price}
-                  </td>
-                  <td className="px-8 py-4 border-r border-b-[#c0c0c3] border-b border-r-[#c0c0c3] font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {item.amount}
-                  </td>
+                    <div className="lg:text-lg mr-5 lg:mr-4 md:text-lg text-sm font-bold text-[#ffeba7]">
+                      <span className="pr-1">₹</span><span>{item.amount * item.price}</span>
+                    </div>
+                  </div>
 
-                  {/* <td
-                    //   rowSpan={userOrders.length}
-                      className="px-6 py-4 border-b-[#c0c0c3] w-[20%]  h-full border-b"
-                    >
-                      <div className="flex gap-2 ml-3 cursor-pointer justify-center  items-center text-white">
-                        <div className="p-2 hover:scale-110 duration-200 flex gap-1 rounded-md hover:bg-red-500 hover:text-white bg-[#87828240]">
-                          <MdOutlineDeleteOutline className="text-lg" />
-                          <span className="font-medium">Cancel Order</span>
-                        </div>
-                      </div>
-                    </td> */}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  {/* <div className=" text-xl bg-[#2b2929] loginbutton text-red-500  p-2 flex items-center mx-4 rounded-[4px]">
+                      <button
+                        // onClick={() => removeFromCart(item.id)}
+                        className="font-medium"
+                      >
+                        <MdDelete />
+                      </button>
+                    </div> */}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="text-center text-white font-medium">
+              No Items Added
+            </div>
+          )}
         </div>
       </div>
     </div>

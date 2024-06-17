@@ -75,6 +75,12 @@ const Products = () => {
                   scope="col"
                   className="px-6 py-4 border-r text-center border-r-[#2d2f5b]"
                 >
+                  Hero-Product
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-4 border-r text-center border-r-[#2d2f5b]"
+                >
                   Top-Product
                 </th>
                 <th
@@ -113,6 +119,9 @@ const Products = () => {
                     </td>
                     <td className="px-6 py-4 font-medium border-r border-r-[#2d2f5b]">
                       {categories[data.category] || data.category}
+                    </td>
+                    <td className="px-6 py-4 font-medium text-center border-r border-r-[#2d2f5b]">
+                      {data.heroProduct?"Yes":"No"}
                     </td>
                     <td className="px-6 py-4 font-medium text-center border-r border-r-[#2d2f5b]">
                       {data.topProduct?"Yes":"No"}
