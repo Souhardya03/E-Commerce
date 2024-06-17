@@ -9,6 +9,7 @@ import Hero from "./components/HomePage/Hero";
 import NavBar from "./components/NavBar/NavBar";
 import SearchPage from "./components/Search/SearchPage";
 import Logout from "./components/Logout/Logout";
+import OrderList from "./components/Orders/OrderList";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/allproducts" element={<AllProducts />} />
         <Route path="/search" element={<SearchPage/>}/>
         <Route path="/logout" element={<Logout/>}/>
+        <Route path="/orderlist" element={<OrderList/>}/>
       </Routes>
       <Footer />
     </>

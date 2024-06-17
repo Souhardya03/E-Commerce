@@ -5,7 +5,7 @@ import { VscAccount } from "react-icons/vsc";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import "./NavBarStyle.css";
-import { Link } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 import { useCartContext } from "../Context/Cart_Context";
 import SearchForm from "../Search/SearchForm";
 import { useAuth } from "../Context/Auth_context";
@@ -117,7 +117,7 @@ const NavBar = () => {
                     </Menu.Item>:null}
                     {isLoggedIn && isAdmin===0?<Menu.Item>
                     {({ active }) => (
-                        <a href="/" className="text-sm  text-white">
+                        <a href="/orderlist" className="text-sm  text-white">
                           Order List
                         </a>
                       )}

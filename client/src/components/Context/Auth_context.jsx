@@ -147,8 +147,46 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const isAuthorizedToken = token;
+  
+  //get single order
+  const [singleOrder, setSingleOrder] = useState();
+  const getSingleOrder = async()=>{
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/single-order/${userdata?.id}`,{
+        method:"GET",
+        headers:{Authorization:isAuthorizedToken}
+      });
+      const data = await response.json();
+      if(response.ok){
+        setSingleOrder(data.data);
+      }
+    } catch (error) {
+      console.log(error);
+      console.log("Error from get single order auth context");
+    }
+  }
+  const [allorders, setallorders] = useState()
+  const displayallorders = async()=>{
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/display-orders`,{
+        method:"GET",
+        headers:{Authorization:isAuthorizedToken}
+      });
+      const data = await response.json();
+      if(response.ok){
+        setallorders(data.data)
+      }
+    } catch (error) {
+      console.log(error);
+      console.log("Error From displayallorders context");
+    }
+  }
+
   useEffect(() => {
     getCategory();
+    getSingleOrder();
+    displayallorders();
   }, []);
 
   useEffect(() => {
@@ -162,6 +200,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        apiUrl,
         createUser,
         logout,
         login,
@@ -173,7 +212,7 @@ export const AuthProvider = ({ children }) => {
         category,
         getSingleCategory,
         singleCategory,
-        createOrder
+        createOrder,singleOrder,allorders
       }}
     >
       {children}

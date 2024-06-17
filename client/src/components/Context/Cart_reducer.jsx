@@ -1,8 +1,11 @@
 const Cart_reducer = (state, action) => {
   const amount = 1;
+
   if (action.type === "ADD_TO_CART") {
-    let { item } = action.payload;
+    const { item } = action.payload;
+    const newCartId = state.cart.length ? state.cart[state.cart.length - 1].cartId + 1 : 1;
     let CartItems = {
+      cartId: newCartId,
       id: item._id,
       amount,
       title: item.name,
@@ -10,17 +13,20 @@ const Cart_reducer = (state, action) => {
       info: item?.info,
       image: item.photo[0],
     };
+
     return {
       ...state,
       cart: [...state.cart, CartItems],
     };
   }
+
   if (action.type === "REMOVE_FROM_CART") {
     return {
       ...state,
       cart: state.cart.filter((x) => x.id !== action.payload),
     };
   }
+
   if (action.type === "ADD_TO_Existing_CART") {
     let updatedProduct = state.cart.map((currelement) => {
       if (currelement.id === action.payload) {
@@ -34,16 +40,18 @@ const Cart_reducer = (state, action) => {
         return currelement;
       }
     });
+
     return {
       ...state,
       cart: updatedProduct,
     };
   }
+
   if(action.type === "Remove_All_Items"){
-    return{
+    return {
         ...state,
         cart: []
-    }
+    };
   }
 
   return state;

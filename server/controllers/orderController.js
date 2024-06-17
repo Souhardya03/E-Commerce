@@ -23,4 +23,29 @@ const displayorder = async(req,res)=>{
   }
 }
 
-module.exports = { createOrder,displayorder };
+//get single order by id
+const getSingleOrder = async(req,res)=>{
+  try {
+    const id = req.params.id
+    const data = await Orders.findOne({userId:id})
+    res.status(200).json({ message: "Order fetched", data });
+  } catch (error) {
+    console.log(error);
+    console.log("Error from getsingleorder order controller");
+  }
+}
+
+//delete order by id
+const deleteOrder = async(req,res)=>{
+  try {
+    const id = req.params.id;
+    const result = await Orders.deleteOne({_id:id})
+    res.status(200).json({ message: "Order deleted" });
+  } catch (error) {
+    console.log(error);
+    console.log("Error from delete order");
+  }
+}
+
+
+module.exports = { createOrder,displayorder,getSingleOrder,deleteOrder };
