@@ -35,7 +35,7 @@ const NavBar = () => {
         </div>
 
         <div className="text-[#d8d6d6da] flex items-center text-2xl lg:gap-12 md:gap-4 gap-1 font-medium">
-          <a href="/cart" onClick={scrollToTop}>
+          <Link to="/cart" onClick={scrollToTop}>
             <button
               type="button"
               className="relative inline-flex items-center p-3 text-sm font-medium text-center text-white "
@@ -49,7 +49,7 @@ const NavBar = () => {
                 </>
               )}
             </button>
-          </a>
+          </Link>
           <div>
             <Menu as="div" className="relative ml-3">
               <div>
@@ -66,7 +66,7 @@ const NavBar = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute fontstyle1 right-0 z-10 mt-2 w-[18rem] h-[16rem] origin-top-right rounded-md border border-gray-500 bg-[#3f3c3c] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className={`absolute fontstyle1 right-0 z-10 mt-2 w-[18rem] ${isLoggedIn?"h-[15rem]":"h-[10rem]"} origin-top-right rounded-md border border-gray-500 bg-[#3f3c3c] py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}>
                   <div className="flex flex-col gap-2 p-3 px-4">
                     <Menu.Item>
                       <>
@@ -101,13 +101,14 @@ const NavBar = () => {
                       </>
                     </Menu.Item>
 
-                    <Menu.Item>
+                      {isLoggedIn?<Menu.Item>
                       {({ active }) => (
                         <Link to="/profile" className="text-sm mt-3 text-white">
                           Your Profile
                         </Link>
                       )}
-                    </Menu.Item>
+                    </Menu.Item>:null}
+                    
                     {isAdmin===1?<Menu.Item>
                       {({ active }) => (
                         <a href="https://e-commerce-admin-tan.vercel.app/customers" target="_blank" rel="noreferrer" className="text-sm  text-white">

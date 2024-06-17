@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCartContext } from "../Context/Cart_Context";
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useAuth } from "../Context/Auth_context";
 import { FaPhone } from "react-icons/fa6";
 
@@ -12,8 +12,8 @@ const Cart = () => {
   const data = userdata;
   const { cart, removeFromCart, removeAllItems } = useCartContext();
   const [order, setorder] = useState({
-    userId:data.id,
-    email:data.email,
+    userId:data?.id,
+    email:data?.email,
     cart:cart
   })
   const orderClick = async() => {
@@ -28,7 +28,7 @@ const Cart = () => {
       theme: "dark",
     });
     setorder({
-      userId:data.id,email:data.email, cart: cart
+      userId:data?.id,email:data?.email, cart: cart
     })
     console.log(order);
     if(order)
@@ -81,7 +81,7 @@ const Cart = () => {
             }
           >
             {cart.length !== 0 ? (
-              cart.map((item) => (
+              cart?.map((item) => (
                 <div key={item.id}>
                   <div className="flex flex-row items-center rounded-lg bg-[#474444] ">
                     <div className="relative right-3  rounded-[4px] p-1 px-3 font-medium bg-red-500 text-white ">
@@ -304,16 +304,20 @@ const Cart = () => {
               </p>
             </div>
           </div>
+          
           <button
-            onClick={handlesubmit}
-            disabled={cart.length === 0 ? true : false}
+           
+            disabled={ cart.length === 0 ? true : false}
             className={
-              cart.length !== 0
+               cart.length !== 0
                 ? "mt-4  mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
                 : "mt-4  mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white cursor-not-allowed"
             }
           >
-            Place Order
+            {
+              !data?<><a href="/login">Login</a></>:<><div  onClick={handlesubmit}>Place Order</div></>
+            }
+            
           </button>
         </form>
       </div>
