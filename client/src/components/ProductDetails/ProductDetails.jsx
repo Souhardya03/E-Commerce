@@ -155,6 +155,9 @@ const ProductDetails = () => {
         <div className="mt-10 bg-[#4f4d4d2e] rounded-xl shadowDetails p-6">
           <h3 className="text-lg font-bold text-white">Product information</h3>
           <ul className="mt-6 space-y-6 text-white">
+          <li className="text-sm">
+              Brand <span className="ml-4 float-right">{data.brandname}</span>
+            </li>
             <li className="text-sm">
               Model <span className="ml-4 float-right">{data.name}</span>
             </li>

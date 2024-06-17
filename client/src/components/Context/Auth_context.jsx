@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
+import {toast,Zoom} from "react-toastify"
 export const AuthContext = createContext();
-
 export const AuthProvider = ({ children }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -183,6 +183,39 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+
+  //update user
+  const updateUser = async ( user) => {
+    try {
+      const response = await fetch(`${apiUrl}/api/auth/updateuser/${user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        toast.success("User Updated!", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Zoom,
+        });
+        const parsedUserdata = JSON.stringify(user);
+    setUserdata(parsedUserdata);
+    window.localStorage.setItem("userdata", parsedUserdata);
+      }
+    } catch (error) {
+      console.log("Error from updateUser", error);
+    }
+  };
+
+
   useEffect(() => {
     getCategory();
     getSingleOrder();
@@ -212,7 +245,7 @@ export const AuthProvider = ({ children }) => {
         category,
         getSingleCategory,
         singleCategory,
-        createOrder,singleOrder,allorders
+        createOrder,singleOrder,allorders,updateUser
       }}
     >
       {children}

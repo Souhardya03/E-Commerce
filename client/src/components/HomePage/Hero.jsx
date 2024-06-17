@@ -22,10 +22,10 @@ export default function Hero() {
   useEffect(() => {
     if (displayProducts) {
       // Filter products that have topProduct set to true
-      const topProducts = displayProducts.filter(
-        (product) => product.topProduct === true
+      const heroProducts = displayProducts.filter(
+        (product) => product.heroProduct === true
       );
-      setHeroProducts(topProducts);
+      setHeroProducts(heroProducts);
     }
   }, [displayProducts]);
 

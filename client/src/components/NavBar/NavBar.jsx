@@ -103,9 +103,9 @@ const NavBar = () => {
 
                     <Menu.Item>
                       {({ active }) => (
-                        <a href="/" className="text-sm mt-3 text-white">
+                        <Link to="/profile" className="text-sm mt-3 text-white">
                           Your Profile
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                     {isAdmin===1?<Menu.Item>

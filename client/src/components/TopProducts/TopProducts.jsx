@@ -10,14 +10,19 @@ const TopProducts = () => {
   const [products, setProducts] = useState([]);
   const [curSection, setCurSection] = useState(0);
 
-  // Ensure we only set products if displayProducts has changed
-  useEffect(() => {
-    setProducts(displayProducts);
-  }, [displayProducts]);
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
+  useEffect(() => {
+    if (displayProducts) {
+      // Filter products that have topProduct set to true
+      const topProducts = displayProducts.filter(
+        (product) => product.topProduct === true
+      );
+      setProducts(topProducts);
+    }
+  }, [displayProducts]);
 
   const handleClick = (categoryId, index) => {
     if (categoryId === category[0]._id) {

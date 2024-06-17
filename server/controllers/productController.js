@@ -14,9 +14,11 @@ const createProduct = async (req, res) => {
       topProduct,
       description,
       featuredProduct,
+      heroProduct,
+      brandname,
       info
     } = req.body;
-    const Products = await ProductModel.create({ name, slug: slugify(name),finalprice,originalprice,category,quantity,shipping,description,photo,topProduct,featuredProduct,info });
+    const Products = await ProductModel.create({ name, slug: slugify(name),finalprice,originalprice,category,quantity,shipping,description,photo,topProduct,featuredProduct,info,heroProduct,brandname });
     return res.status(200).json({ message: "Created Successfully", data: Products });
   } catch (error) {
     console.log(error);

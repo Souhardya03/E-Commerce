@@ -17,7 +17,9 @@ const ProductsModal = ({ toggle, handletog }) => {
     photo: "",
     topProduct: "",
     featuredProduct: "",
-    info:""
+    info:"",
+    heroProduct:"",
+    brandname:""
   });
 
   useEffect(() => {
@@ -65,6 +67,8 @@ const ProductsModal = ({ toggle, handletog }) => {
           topProduct: user.topProduct,
           featuredProduct: user.featuredProduct,
           photo: image_url,
+          brandname: user.brandname,
+          heroProduct: user.heroProduct,
           info: user.info
         };
 
@@ -174,6 +178,22 @@ const ProductsModal = ({ toggle, handletog }) => {
                         className="w-full bg-[#1e1e49] p-4 mt-1 rounded-md"
                         value={user.name}
                         placeholder="Enter the title of product..."
+                        required
+                      />
+                    </div>
+                    <div className="px-4 pb-3">
+                      <label htmlFor="brandname" className="text-xl pl-2">
+                        Brand Name
+                      </label>
+
+                      <input
+                        type="text"
+                        id="brandname"
+                        name="brandname"
+                        onChange={handleInput}
+                        className="w-full bg-[#1e1e49] p-4 mt-1 rounded-md"
+                        value={user.brandname}
+                        placeholder="Enter the brand name of product..."
                         required
                       />
                     </div>
@@ -288,6 +308,35 @@ const ProductsModal = ({ toggle, handletog }) => {
                               {cat.name}
                             </option>
                           ))}
+                        </select>
+                      </Transition>
+                    </div>
+                    <div className="py-3 px-4">
+                      <label htmlFor="heroProduct" className="text-xl pl-2">
+                        Hero-Product
+                      </label>
+                      <Transition
+                        as={Fragment}
+                        show={true}
+                        enter="transition ease-out duration-200"
+                        enterFrom="opacity-0 transform scale-95"
+                        enterTo="opacity-100 transform scale-100"
+                        leave="transition ease-in duration-150"
+                        leaveFrom="opacity-100 transform scale-100"
+                        leaveTo="opacity-0 transform scale-95"
+                      >
+                        <select
+                          id="heroProduct"
+                          name="heroProduct"
+                          onChange={handleInput}
+                          value={user.heroProduct}
+                          className="w-full bg-[#1e1e49] p-4 mt-2 rounded-[4px]"
+                          required
+                        >
+                          <option value="">Choose</option>
+
+                          <option value={true}>Yes</option>
+                          <option value={false}>No</option>
                         </select>
                       </Transition>
                     </div>

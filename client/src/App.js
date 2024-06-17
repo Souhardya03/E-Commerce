@@ -10,6 +10,7 @@ import NavBar from "./components/NavBar/NavBar";
 import SearchPage from "./components/Search/SearchPage";
 import Logout from "./components/Logout/Logout";
 import OrderList from "./components/Orders/OrderList";
+import Profile from "./components/Profile/Profile";
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
         <Route path="/search" element={<SearchPage/>}/>
         <Route path="/logout" element={<Logout/>}/>
         <Route path="/orderlist" element={<OrderList/>}/>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
       <Footer />
     </>
