@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCartContext } from "../Context/Cart_Context";
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md";
 import { toast } from "react-toastify";
-import { useNavigate} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../Context/Auth_context";
 import { FaPhone } from "react-icons/fa6";
 
@@ -12,11 +12,11 @@ const Cart = () => {
   const data = userdata;
   const { cart, removeFromCart, removeAllItems } = useCartContext();
   const [order, setorder] = useState({
-    userId:data?.id,
-    email:data?.email,
-    cart:cart
-  })
-  const orderClick = async() => {
+    userId: data?.id,
+    email: data?.email,
+    cart: cart,
+  });
+  const orderClick = async () => {
     toast.success("Order Successfull", {
       position: "top-right",
       autoClose: 1000,
@@ -28,12 +28,13 @@ const Cart = () => {
       theme: "dark",
     });
     setorder({
-      userId:data?.id,email:data?.email, cart: cart
-    })
+      userId: data?.id,
+      email: data?.email,
+      cart: cart,
+    });
     console.log(order);
-    if(order)
-    await createOrder(order);
-    
+    if (order) await createOrder(order);
+
     navigate("/");
     removeAllItems();
   };
@@ -50,7 +51,7 @@ const Cart = () => {
     email: data?.email || "",
     address: data?.address || "",
     phone: data?.phone || "",
-    total: totalAmount ,
+    total: totalAmount,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -283,7 +284,7 @@ const Cart = () => {
                 placeholder="Phone number"
               />
               <div className="pointer-events-none absolute text-gray-400 inset-y-0 left-0 inline-flex items-center px-3">
-                <FaPhone/>
+                <FaPhone />
               </div>
             </div>
 
@@ -304,21 +305,32 @@ const Cart = () => {
               </p>
             </div>
           </div>
-          
-          <button
-           
-            disabled={ cart.length === 0 ? true : false}
-            className={
-               cart.length !== 0
-                ? "mt-4  mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
-                : "mt-4  mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white cursor-not-allowed"
-            }
-          >
-            {
-              !data?<><a href="/login">Login</a></>:<><div  onClick={handlesubmit}>Place Order</div></>
-            }
-            
-          </button>
+
+          {data ? (
+            <>
+              <button
+                disabled={cart.length === 0 ? true : false}
+                onClick={handlesubmit}
+                className={
+                  cart.length !== 0
+                    ? "mt-4  mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+                    : "mt-4  mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white cursor-not-allowed"
+                }
+              >
+                Place Order
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                onClick={()=>window.scrollTo(0,0)}
+                className={
+                  "mt-4  mb-8 flex justify-center  rounded-md bg-gray-900 px-6 py-3 font-medium text-white "
+                }
+              >Login</Link>
+            </>
+          )}
         </form>
       </div>
     </>
