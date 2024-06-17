@@ -97,9 +97,9 @@ const Products = () => {
                         <img
                           src={data.photo[0]}
                           alt=""
-                          className="w-[25%] rounded-[6px]"
+                          className="w-[20%] rounded-[6px]"
                         />
-                        <div className="text-[12px] lg:text-sm">{data.name}</div>
+                        <div className="text-[8px] lg:text-sm">{data.name}</div>
                       </div>
                     </th>
                     <th

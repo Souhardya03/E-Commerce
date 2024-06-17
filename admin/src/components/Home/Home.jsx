@@ -21,11 +21,11 @@ const Home = () => {
       <div className="text-white flex ">
         <div
           className={`relative  h-[100vh] duration-200 ${
-            open ? "  left-0 w-[20%] text-lg" : " -left-[200px] w-[0%] text-sm"
+            open ? "  left-0 lg:w-[20%] w-[50%] text-lg" : " -left-[200px] w-[0%] text-sm"
           } bg-[#151431]`}
         >
           <div className="flex flex-col">
-            <div className="text-center block text-wrap py-6 font-medium ">
+            <div className="text-center text-[15px] lg:text-lg block text-wrap py-6 font-medium ">
               Admin Dashboard
             </div>
             <div
@@ -66,7 +66,7 @@ const Home = () => {
                 {" "}
                 {open ? <HiOutlineMenuAlt2 /> : <CgMenuLeft />}{" "}
               </div>
-              <div className="mx-8 flex items-center">
+              <div className="mx-8  hidden lg:flex items-center">
                 <input
                   type="text"
                   className="p-2 px-4 rounded-[4px] bg-[#1e1e49]"

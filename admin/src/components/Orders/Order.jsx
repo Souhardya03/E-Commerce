@@ -50,14 +50,14 @@ const Order = () => {
                     <td className="lg:px-6 px-3 py-4 border-r border-r-[#2d2f5b] w-[28%] font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex gap-2 items-center">
                         <img src={item.image} alt="" className="w-[25%] rounded-[6px]" />
-                        <div className="text-[12px] lg:text-sm">
+                        <div className="text-[8px] lg:text-sm">
                           {item.title}
                         </div>
                       </div>
                     </td>
                     {itemIndex === 0 && (
                       <>
-                        <td rowSpan={data.cart.length} className="px-6 py-4 border-r border-r-[#2d2f5b] font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td rowSpan={data.cart.length} className="px-6 py-4 border-r border-r-[#2d2f5b] font-medium text-gray-900 whitespace-nowrap dark:text-white lg:text-3xl text-[10px]">
                           {data.email}
                         </td>
                       </>
