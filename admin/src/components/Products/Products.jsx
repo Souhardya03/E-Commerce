@@ -43,7 +43,7 @@ const Products = () => {
           <button className="text-sm font-medium">Add New</button>
           <div className="text-lg">+</div>
         </div>
-        <div className={`relative border ${displayProducts.length===0?"h-[8rem]":"h-[30rem]"} overflow-y-auto border-[#2d2f5b] overflow-x-auto shadow-md sm:rounded-lg`}>
+        <div className={`relative border  border-[#2d2f5b] overflow-x-auto shadow-md sm:rounded-lg`}>
           <table className="w-full  text-sm text-left rtl: bg-transparent text-gray-500 dark:text-gray-400">
             <thead className="text-xs sticky top-0 bg-[#1c1d43] text-gray-700 uppercase dark:text-gray-400">
               <tr>

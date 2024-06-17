@@ -19,9 +19,7 @@ const Order = () => {
       <div className="text-[#97a4be] font-medium text-3xl">Orders</div>
       <div className="h-auto bg-[#151431] p-4 rounded-lg mt-4">
         <div
-          className={`relative border ${
-            allorders.length === 0 ? "h-[8rem]" : "h-[30rem]"
-          } overflow-y-auto border-[#2d2f5b] overflow-x-auto shadow-md sm:rounded-lg`}
+          className={`relative border border-[#2d2f5b] overflow-x-auto shadow-md sm:rounded-lg`}
         >
           <table className="w-full text-sm text-left rtl:bg-transparent text-gray-500 dark:text-gray-400">
             <thead className="text-xs sticky top-0 bg-[#1c1d43] text-gray-700 uppercase dark:text-gray-400">
@@ -57,7 +55,7 @@ const Order = () => {
                     </td>
                     {itemIndex === 0 && (
                       <>
-                        <td rowSpan={data.cart.length} className="px-6 py-4 border-r border-r-[#2d2f5b] font-medium text-gray-900 whitespace-nowrap dark:text-white lg:text-3xl text-[10px]">
+                        <td rowSpan={data.cart.length} className="px-6 py-4 border-r border-r-[#2d2f5b] font-medium text-gray-900 whitespace-nowrap dark:text-white lg:text-sm text-[10px]">
                           {data.email}
                         </td>
                       </>

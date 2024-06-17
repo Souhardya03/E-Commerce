@@ -10,6 +10,7 @@ import Category from "./components/Category/Category.jsx";
 import { useAuth } from "./components/Context/Context.jsx";
 import { useEffect } from "react";
 import Order from "./components/Orders/Order.jsx";
+import Scrollbar from "./components/Scrollbar/Scrollbar.jsx";
 
 function App() {
   const { isLoggedIn, isAdmin } = useAuth();
@@ -25,6 +26,8 @@ function App() {
 
   return (
     <>
+    <Scrollbar>
+
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />}>
@@ -36,6 +39,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/modal" element={<Modal />} />
       </Routes>
+    </Scrollbar>
     </>
   );
 }

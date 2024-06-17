@@ -1,0 +1,28 @@
+/* Custom scrollbar styling */
+.scroll-container {
+  overflow: auto;
+  position: relative;
+  height: 100vh; /* Adjust this based on your layout */
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+  transition: opacity 0.5s ease;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(193, 190, 190, 0.4);
+  border-radius: 6px;
+}
+
+.scroll-container:hover::-webkit-scrollbar-thumb {
+  background: rgba(193, 190, 190, 0.4);
+}
+
+.scroll-container.hidden-scrollbar::-webkit-scrollbar {
+  opacity: 0;
+}
