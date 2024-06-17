@@ -5,17 +5,30 @@ import { useAuth } from "../Context/Auth_context";
 const OrderList = () => {
   const { allorders, userdata } = useAuth();
   const [userOrders, setUserOrders] = useState([]);
-  
+
   useEffect(() => {
     if (allorders && userdata) {
-      const ordersForUser = allorders.filter(order => order.userId === userdata.id);
-      const combinedCart = ordersForUser.flatMap(order => order.cart);
+      const ordersForUser = allorders.filter(
+        (order) => order.userId === userdata.id
+      );
+      const combinedCart = ordersForUser.flatMap((order) => order.cart);
       setUserOrders(combinedCart);
     }
   }, [allorders, userdata]);
 
   if (!allorders) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="flex items-center justify-center h-[80vh]">
+        <div
+          class="inline-block h-14 w-14 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+          role="status"
+        >
+          <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+            Loading...
+          </span>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -78,8 +91,8 @@ const OrderList = () => {
                   <td className="px-8 py-4 border-r border-b-[#c0c0c3] border-b border-r-[#c0c0c3] font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {item.amount}
                   </td>
-                  
-                    {/* <td
+
+                  {/* <td
                     //   rowSpan={userOrders.length}
                       className="px-6 py-4 border-b-[#c0c0c3] w-[20%]  h-full border-b"
                     >
@@ -90,7 +103,6 @@ const OrderList = () => {
                         </div>
                       </div>
                     </td> */}
-                  
                 </tr>
               ))}
             </tbody>
